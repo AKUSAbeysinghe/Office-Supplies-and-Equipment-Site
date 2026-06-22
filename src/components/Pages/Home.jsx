@@ -1,24 +1,24 @@
 import React from "react";
-import Banner from "./../Banner";
-import About from "./../Ourstory";
-import Suppliments from "./../SupplimentsSection";
-import Parmacy from "./../ParmacySection";
-import Fitness from "./../FitnessSection";
-import PartnerCTA from "../Partnership";
+
 
 import Hero from "../Hero";
+import CategoryGrid from "../CategoryGrid";
+import About from "../Pages/About";
+import Collections from "../CollectionsSection";
+import WhyChoose from "./WhyChoose";
+import TestimonialsSection from "./Testimonials";
+import CTABanner from "../CTABanner";
 
 const Home = () => {
   return (
     <>
       <Hero/>
-      <Banner />
-      <About />
-      <Parmacy/>
-      <Suppliments/>
-      <Fitness/>
-      <PartnerCTA/>
-      
+      <CategoryGrid/>
+      <About/>
+      <Collections/>
+      <WhyChoose/>
+      <TestimonialsSection/>
+      <CTABanner/>
       
     </>
   );

@@ -1,84 +1,61 @@
 import React from 'react';
-import Mains from '../assets/Mains/Banner.png';
+import WorkWave from "../assets/Mains/Work & Weave.jpg";
 
-const HeroSection = () => {
-  const whatsappNumber = "919876543210"; // ← Change to your actual WhatsApp number
-
-  const openWhatsApp = (message = "") => {
-    const encodedMessage = encodeURIComponent(message);
-    const url = encodedMessage 
-      ? `https://wa.me/${whatsappNumber}?text=${encodedMessage}` 
-      : `https://wa.me/${whatsappNumber}`;
-    window.open(url, '_blank');
-  };
-
+export default function HeroSection() {
   return (
-    <section className="relative min-h-screen bg-[#FCFAF7] px-8 py-20 overflow-hidden">
-
-      {/* Blurred Background Image */}
-      <div
-        className="absolute inset-0 bg-center bg-cover opacity-40 blur-xl scale-110"
-        style={{
-          backgroundImage: `url(${Mains})`,
-        }}
-      />
-
-      {/* Content */}
-      <div className="relative max-w-3xl mx-auto text-center">
-
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 border border-gray-200 rounded-full text-sm text-gray-700 bg-white shadow-sm">
-          <span>✨</span>
-          <span>Your wellness, simplified</span>
-        </div>
-
-        {/* Heading */}
-        <h1 className="text-6xl font-semibold text-gray-900 leading-tight mb-6">
-          Health & wellness, <br />
-          <span className="text-[#2E7D56]">
-            all in one place.
+    <section className="w-full min-h-screen bg-[#F9F9FB] flex items-center justify-center px-6 py-12 md:px-16 lg:px-24">
+      <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        
+        {/* Left Side: Content */}
+        <div className="flex flex-col items-start space-y-6 max-w-xl">
+          {/* Tag */}
+          <span className="bg-[#FDF2E9] text-[#D97706] text-xs font-bold uppercase tracking-widest px-3 py-1 rounded">
+            The New Professional
           </span>
-        </h1>
 
-        {/* Subtext */}
-        <p className="text-lg text-gray-600 mb-10 max-w-xl mx-auto">
-          From trusted pharmacies and premium supplements to modern fitness
-          clubs — Vivara connects you with everything you need to feel your best.
-        </p>
+          {/* Main Heading */}
+          <h1 className="font-serif italic text-5xl md:text-6xl lg:text-7xl text-[#0F172A] leading-[1.1] font-semibold tracking-tight">
+            Work better, <br />
+            <span className="not-italic font-medium">beautifully.</span>
+          </h1>
 
-        {/* Buttons */}
-        <div className="flex items-center justify-center gap-4 mb-10">
-          {/* Primary Button */}
-          <button 
-            onClick={() => openWhatsApp("Hi, I'm interested in exploring wellness services.")}
-            className="flex items-center gap-2 px-6 py-3 bg-[#2E7D56] text-white rounded-full font-medium hover:bg-[#256a47] transition-all"
-          >
-            Explore wellness <span>→</span>
-          </button>
+          {/* Subtext */}
+          <p className="text-slate-500 text-base md:text-lg leading-relaxed font-normal">
+            Curated equipment for high-performance teams. From ergonomic seating to precision writing instruments.
+          </p>
 
-          {/* Secondary Button */}
-          <button 
-            onClick={() => openWhatsApp("Hi, I'm interested in becoming a partner with Vivara.")}
-            className="px-6 py-3 bg-[#F0EFE9] text-gray-800 rounded-full font-medium hover:bg-[#e4e2da] transition-all"
-          >
-            For partners
-          </button>
-        </div>
+          {/* CTA Buttons */}
+          <div className="flex items-center space-x-4 pt-4 w-full sm:w-auto">
+            {/* Shop Collection - Navigates to Collections Page */}
+            <a 
+              href="/collections" 
+              className="bg-[#0F172A] text-white font-medium text-sm px-8 py-3.5 rounded-full hover:bg-slate-800 transition-colors shadow-sm whitespace-nowrap inline-block"
+            >
+              Shop Collection
+            </a>
 
-        {/* Trust Indicator */}
-        <div className="flex items-center justify-center gap-3">
-          <div className="flex text-orange-400 text-xl">
-            ★★★★★
+            {/* For Business - Opens WhatsApp */}
+            <a 
+              href="https://wa.me/1234567890" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-transparent border border-slate-200 text-[#0F172A] font-medium text-sm px-8 py-3.5 rounded-full hover:bg-slate-50 transition-colors whitespace-nowrap inline-block"
+            >
+              For Business
+            </a>
           </div>
+        </div>
 
-          <span className="text-gray-600 font-medium">
-            Trusted by <span className="font-bold">2M+</span> members worldwide
-          </span>
+        {/* Right Side: Showcase Image */}
+        <div className="w-full h-[400px] md:h-[500px] lg:h-[600px] rounded-3xl overflow-hidden shadow-sm">
+          <img 
+            src={WorkWave}
+            alt="Modern minimal workspace setup" 
+            className="w-full h-full object-cover object-center"
+          />
         </div>
 
       </div>
     </section>
   );
-};
-
-export default HeroSection;
+}
