@@ -31,7 +31,7 @@ export default function CorporateSupply() {
           {/* Premium Animated Call To Action Link */}
           <div className="pt-4">
             <a 
-              href="#" 
+              href="/about" 
               className="group inline-flex items-center space-x-2 text-[#E26D34] text-sm font-medium border-b-2 border-[#E26D34] pb-1 hover:text-[#f2824b] hover:border-[#f2824b] transition-all"
             >
               <span>Learn about Moderna for Business</span>

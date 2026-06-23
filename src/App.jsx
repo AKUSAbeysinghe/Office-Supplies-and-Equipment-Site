@@ -7,12 +7,15 @@ import Furniture from "./components/Pages/furniture.jsx";
 import TechFeature from "./components/Pages/TechFeature.jsx";
 import StationeryFeature from "./components/Pages/StationaryFeature.jsx";
 import Solutions from "./components/Pages/Solutions.jsx";
+import About from "./components/Pages/About.jsx";
 import Footer from "./components/Footer";
 
 import PrivacyPolicy from "./components/Pages/Privacy";
 import TermsOfService from "./components/Pages/Terms.jsx";
 import FAQ from "./components/Pages/FAQ.jsx";
 import Contact from "./components/Pages/Contact.jsx";
+import SustainabilityPage from "./components/Pages/Sustainability.jsx";
+import CareerPage from "./components/Pages/Careers.jsx";
 
 // Admin Pages
 import Login from "./Admin/Login.jsx";
@@ -105,6 +108,18 @@ function App() {
 
 
 
+
+
+       <Route
+          path="/about"
+          element={
+            <Layout>
+              <About />
+            </Layout>
+          }
+        />
+
+
         <Route
           path="/solutions"
           element={
@@ -145,6 +160,26 @@ function App() {
           element={
             <Layout>
               <Contact />
+            </Layout>
+          }
+        />
+
+
+        <Route
+          path="/Sustainability"
+          element={
+            <Layout>
+              <SustainabilityPage />
+            </Layout>
+          }
+        />
+
+
+        <Route
+          path="/Careers"
+          element={
+            <Layout>
+              <CareerPage />
             </Layout>
           }
         />

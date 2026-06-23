@@ -42,8 +42,8 @@ export default function Footer() {
             </h4>
             <ul className="flex flex-col space-y-3 text-[14px] text-slate-400 font-normal">
               <li><a href="/solutions" className="hover:text-slate-900 transition-colors">Solutions</a></li>
-              <li><a href="#" className="hover:text-slate-900 transition-colors">Sustainability</a></li>
-              <li><a href="#" className="hover:text-slate-900 transition-colors">Careers</a></li>
+              <li><a href="/Sustainability" className="hover:text-slate-900 transition-colors">Sustainability</a></li>
+              <li><a href="/Careers" className="hover:text-slate-900 transition-colors">Careers</a></li>
             </ul>
           </div>
 
@@ -53,8 +53,8 @@ export default function Footer() {
               Support
             </h4>
             <ul className="flex flex-col space-y-3 text-[14px] text-slate-400 font-normal">
-              <li><a href="#" className="hover:text-slate-900 transition-colors">Shipping</a></li>
-              <li><a href="#" className="hover:text-slate-900 transition-colors">Returns</a></li>
+              <li><a href="/privacy-policy" className="hover:text-slate-900 transition-colors">Privacy</a></li>
+              <li><a href="/about" className="hover:text-slate-900 transition-colors">About</a></li>
               <li><a href="/contact" className="hover:text-slate-900 transition-colors">Contact</a></li>
             </ul>
           </div>

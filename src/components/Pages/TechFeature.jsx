@@ -1,135 +1,258 @@
-import React from 'react';
-import TechBannerImge from "../../assets/Mains/Tech/TechBanner.jpg";
+import React, { useState, useEffect } from "react";
+import TechBanner from "../../assets/Mains/Tech/TechBanner.jpg";
 
-const techProducts = [
-  {
-    id: 1,
-    name: 'Keychron Q1 HE',
-    description: 'Magnetic Hall Effect switches, gasket mount.',
-    price: '$219',
-    imageUrl: 'https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?auto=format&fit=crop&q=80&w=800',
-    alt: 'Keychron Q1 HE mechanical keyboard'
-  },
-  {
-    id: 2,
-    name: 'Logitech MX Master 3S',
-    description: '8K DPI, MagSpeed scrolling, ergonomic.',
-    price: '$99',
-    imageUrl: 'https://images.unsplash.com/photo-1527864550417-7fd5538e3d6c?auto=format&fit=crop&q=80&w=800',
-    alt: 'Logitech MX Master 3S mouse on desk'
-  },
-  {
-    id: 3,
-    name: 'Dell UltraSharp 34" Curved',
-    description: 'WQHD ultrawide, 21:9 aspect ratio.',
-    price: '$899',
-    imageUrl: 'https://images.unsplash.com/photo-1587829741301-dc798e83add3?auto=format&fit=crop&q=80&w=800',
-    alt: 'Dell UltraSharp curved ultrawide monitor'
-  }
-];
+const SUBCATEGORY_IDS = {
+  COMPUTERS_LAPTOPS: 15,        // Update these IDs based on your database
+  PRINTERS_SCANNERS: 16,
+  COMMUNICATION_DEVICES: 17,
+  NETWORKING_EQUIPMENT: 18,
+  OFFICE_ACCESSORIES: 19,
+};
 
-export default function TechFeature() {
+const TechPage = () => {
+  const [techItems, setTechItems] = useState([]);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchTechItems = async () => {
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const res = await fetch("http://localhost/home_furniture/api/get_products.php");
+      const data = await res.json();
+
+      if (data.success && Array.isArray(data.data)) {
+        const items = data.data.filter(item => item.category_id === 2); // Tech category
+        setTechItems(items);
+      } else {
+        setError("Could not load tech products");
+      }
+    } catch (e) {
+      console.error(e);
+      setError("Failed to fetch items. Please check if the backend is running.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchTechItems();
+  }, []);
+
+  // Filter by subcategory
+  const computersLaptops = techItems.filter(item => item.sub_category_id === SUBCATEGORY_IDS.COMPUTERS_LAPTOPS);
+  const printersScanners = techItems.filter(item => item.sub_category_id === SUBCATEGORY_IDS.PRINTERS_SCANNERS);
+  const communicationDevices = techItems.filter(item => item.sub_category_id === SUBCATEGORY_IDS.COMMUNICATION_DEVICES);
+  const networkingEquipment = techItems.filter(item => item.sub_category_id === SUBCATEGORY_IDS.NETWORKING_EQUIPMENT);
+  const officeAccessories = techItems.filter(item => item.sub_category_id === SUBCATEGORY_IDS.OFFICE_ACCESSORIES);
+
+  const TechCard = ({ item }) => (
+    <div className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100">
+      <div className="relative">
+        <img
+          src={
+            item.image_url
+              ? `http://localhost/home_furniture/${item.image_url}`
+              : "https://via.placeholder.com/600x400?text=Tech+Product"
+          }
+          alt={item.name}
+          className="w-full h-72 object-cover"
+          onError={(e) => {
+            e.target.src = "https://via.placeholder.com/600x400?text=No+Image";
+          }}
+        />
+        {item.popular && (
+          <div className="absolute top-3 left-3 bg-[#8bb174] text-white text-xs font-semibold px-3 py-1 rounded-full">
+            Best Seller
+          </div>
+        )}
+        <div className="absolute top-3 right-3 bg-gray-900 bg-opacity-80 text-white text-sm font-bold px-4 py-1.5 rounded-full">
+          Rs. {new Intl.NumberFormat("en-LK").format(item.price)}
+        </div>
+      </div>
+      <div className="p-6">
+        <h3 className="text-xl font-semibold text-gray-800">{item.name}</h3>
+        <p className="mt-2 text-gray-600 text-sm line-clamp-2">
+          {item.description || "Premium technology solution for modern workspaces"}
+        </p>
+        <a
+          href={`/product/${item.id}`}
+          className="mt-6 w-full py-3.5 bg-[#0F172A] hover:bg-slate-800 text-white font-semibold rounded-xl transition duration-300 block text-center"
+        >
+          View Details
+        </a>
+      </div>
+    </div>
+  );
+
+  const Section = ({ title, subtitle, items, bgColor = "bg-[#fdfaf6]", id }) => (
+    <div className={`${bgColor} py-16 px-4 sm:px-6 lg:px-8`} id={id}>
+      <div className="text-center mb-12">
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-800">{title}</h2>
+        {subtitle && <p className="mt-3 text-gray-600">{subtitle}</p>}
+      </div>
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {items.length === 0 ? (
+          <p className="text-center text-gray-600 col-span-3 py-12">
+            No items available in this category yet.
+          </p>
+        ) : (
+          items.map((item) => <TechCard key={item.id} item={item} />)
+        )}
+      </div>
+    </div>
+  );
+
   return (
-    <>
-      {/* Feature Section */}
+    <div className="bg-[#fdfaf6]">
+      {error && (
+        <div className="p-4 bg-red-100 text-red-700 text-center font-medium">
+          {error}
+        </div>
+      )}
+
+      {isLoading && (
+        <div className="text-center py-20 text-gray-600">Loading Tech Collection...</div>
+      )}
+
+      {/* === Premium Editorial Hero === */}
       <section className="w-full min-h-[500px] bg-[#F9F9FB] flex items-center justify-center px-6 py-12 md:px-16 lg:px-24">
         <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          
-          {/* Left Side: Copy Content */}
+          {/* Left Side */}
           <div className="flex flex-col items-start space-y-6 max-w-xl">
             <span className="bg-[#FDF2E9] text-[#D97706] text-[11px] font-bold uppercase tracking-widest px-2.5 py-1 rounded">
               Technology
             </span>
 
             <h2 className="font-serif text-5xl md:text-6xl text-[#0F172A] leading-[1.1] font-semibold tracking-tight">
-              The desktop, refined.
+              The desktop,<br />
+              <span>refined.</span>
             </h2>
 
             <p className="text-slate-500 text-sm md:text-base leading-relaxed font-normal max-w-md">
-              Mechanical keyboards, precision pointers, lighting, and laptop ergonomics — every device curated for output.
+              Mechanical keyboards, precision mice, ultrawide monitors, and enterprise-grade networking — every device curated for maximum output.
             </p>
+
+            <div className="flex gap-4 pt-4">
+              <a
+                href="#tech-collections"
+                className="px-8 py-4 bg-[#0F172A] text-white font-semibold rounded-full hover:bg-slate-800 transition"
+              >
+                Shop Collection
+              </a>
+              <a
+                href="/book-showroom"
+                className="px-8 py-4 border border-[#0F172A] text-[#0F172A] font-semibold rounded-full hover:bg-[#0F172A] hover:text-white transition"
+              >
+                Book Showroom
+              </a>
+            </div>
           </div>
 
-          {/* Right Side: Showcase Image */}
+          {/* Right Side - Banner */}
           <div className="w-full h-[350px] sm:h-[450px] lg:h-[520px] rounded-3xl overflow-hidden bg-slate-100">
-            <img 
-              src={TechBannerImge}
-              alt="Mechanical keyboard and premium wireless mouse desk setup" 
+            <img
+              src={TechBanner}
+              alt="Premium tech setup with mechanical keyboard and ultrawide monitor"
               className="w-full h-full object-cover object-center"
             />
           </div>
         </div>
       </section>
 
-      {/* Product Grid Section */}
-      <section className="w-full bg-white px-6 py-12 md:px-12 lg:px-24">
-        <div className="max-w-7xl mx-auto">
-          
-          {/* Header Section */}
-          <div className="flex items-baseline justify-between border-b border-gray-100 pb-6 mb-8">
-            <h2 className="font-serif text-3xl font-medium text-[#0F172A] tracking-tight">
-              All Products
-            </h2>
-            <span className="text-slate-400 text-xs font-normal">
-              6 items
-            </span>
-          </div>
+      {/* Product Sections */}
+      <Section
+        title="Computers & Laptops"
+        subtitle="Desktop Computers - Laptops - Mini PCs - Workstations"
+        items={computersLaptops}
+        id="tech-collections"
+        bgColor="bg-[#fdfaf6]"
+      />
 
-          {/* 3-Column Product Catalog Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-12 lg:gap-x-8">
-            {techProducts.map((product) => (
-              <div key={product.id} className="group cursor-pointer flex flex-col">
-                
-                {/* Product Image Window */}
-                <div className="w-full aspect-[4/3] sm:aspect-square overflow-hidden rounded-2xl bg-slate-50 mb-4">
-                  <img
-                    src={product.imageUrl}
-                    alt={product.alt}
-                    className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-                  />
-                </div>
+      <Section
+        title="Printers & Scanners"
+        subtitle="Inkjet Printers - Laser Printers - All-in-One Printers"
+        items={printersScanners}
+        bgColor="bg-white"
+      />
 
-                {/* Product Info */}
-                <div className="flex flex-col space-y-1 px-1">
-                  <div className="flex justify-between items-baseline">
-                    <h3 className="text-[#0F172A] font-semibold text-[15px] tracking-tight group-hover:text-slate-700 transition-colors">
-                      {product.name}
-                    </h3>
-                    <span className="text-[#0F172A] font-semibold text-[15px]">
-                      {product.price}
-                    </span>
-                  </div>
-                  <p className="text-slate-400 text-xs font-normal leading-relaxed">
-                    {product.description}
-                  </p>
-                </div>
+      <Section
+        title="Communication Devices"
+        subtitle="IP Phones - Conference Phones - Headsets - Webcams"
+        items={communicationDevices}
+        bgColor="bg-[#fdfaf6]"
+      />
+
+      <Section
+        title="Networking Equipment"
+        subtitle="Routers - Switches - Access Points - Network Cables"
+        items={networkingEquipment}
+        bgColor="bg-white"
+      />
+
+      <Section
+        title="Office Accessories & Peripherals"
+        subtitle="Monitors - Keyboards - Mice - External Storage - UPS & Power Solutions"
+        items={officeAccessories}
+        bgColor="bg-[#fdfaf6]"
+      />
+
+      {/* Why Choose Tech Section */}
+      <div className="bg-[#fdfaf6] py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
+            Why Choose Our Tech Solutions?
+          </h2>
+          <p className="mt-3 text-gray-600">Enterprise-grade performance for modern workspaces</p>
+
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { title: "Premium Performance", description: "Latest processors, high-refresh displays, and responsive peripherals" },
+              { title: "Enterprise Reliability", description: "Durable hardware backed by solid warranties" },
+              { title: "Seamless Integration", description: "Compatible with existing office infrastructure" },
+              { title: "Expert Support", description: "Dedicated technical assistance and setup guidance" },
+            ].map((benefit, index) => (
+              <div key={index} className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-all text-center">
+                <h3 className="text-xl font-semibold text-gray-800">{benefit.title}</h3>
+                <p className="mt-3 text-gray-600">{benefit.description}</p>
               </div>
             ))}
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* CTA Section */}
+      {/* Bulk Order CTA */}
       <section className="w-full bg-white px-6 py-12 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto">
           <div className="w-full bg-[#F8F9FA] rounded-[32px] py-16 px-6 flex flex-col items-center justify-center text-center space-y-5">
-            
             <h2 className="font-serif text-3xl md:text-4xl text-[#0F172A] font-normal tracking-tight">
               Bulk orders for your team?
             </h2>
             
             <p className="text-slate-400 text-sm md:text-base font-normal max-w-md leading-relaxed">
-              Get enterprise pricing, custom configurations, and dedicated support.
+              Get enterprise pricing, custom configurations, dedicated support, and bulk deployment assistance.
             </p>
             
-            <div className="pt-3">
-              <button className="bg-[#0F172A] text-white font-semibold text-sm px-8 py-3.5 rounded-full hover:bg-slate-800 transition-colors shadow-sm whitespace-nowrap">
-                Explore Business Solutions
-              </button>
+            <div className="pt-3 flex flex-col sm:flex-row gap-4">
+              <a 
+                href="/book-showroom"
+                className="bg-[#0F172A] text-white font-semibold text-sm px-8 py-3.5 rounded-full hover:bg-slate-800 transition-colors shadow-sm whitespace-nowrap"
+              >
+                Book Showroom Visit
+              </a>
+              <a 
+                href="tel:+94112345678"
+                className="border border-[#0F172A] text-[#0F172A] font-semibold text-sm px-8 py-3.5 rounded-full hover:bg-[#0F172A] hover:text-white transition-colors"
+              >
+                Get Free Consultation
+              </a>
             </div>
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
-}
+};
+
+export default TechPage;

@@ -1,203 +1,176 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-/* ================= ICONS ================= */
+export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
 
-const PhoneIcon = () => (
-<svg className="w-14 h-14" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-<path d="M3 5a2 2 0 012-2h2l2 5-2 1c1 3 3 5 6 6l1-2 5 2v2a2 2 0 01-2 2h-1C9 19 5 15 3 6V5z"
-strokeLinecap="round" strokeLinejoin="round"/>
-</svg>
-);
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-const MailIcon = () => (
-<svg className="w-14 h-14" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-<path d="M4 4h16v16H4V4z" />
-<path d="M4 6l8 6 8-6" strokeLinecap="round" strokeLinejoin="round"/>
-</svg>
-);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add your form submission logic here (API call, emailjs, etc.)
+    alert("Thank you! We'll get back to you soon.");
+    setFormData({ name: '', email: '', subject: '', message: '' });
+  };
 
-const LocationIcon = () => (
-<svg className="w-14 h-14" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-<path d="M12 22s8-5 8-12a8 8 0 10-16 0c0 7 8 12 8 12z"/>
-<circle cx="12" cy="10" r="3"/>
-</svg>
-);
+  return (
+    <div className="bg-[#F9F9FB] min-h-screen">
+      {/* Hero Header */}
+      <section className="pt-24 pb-16 px-6 md:px-12 lg:px-24">
+        <div className="max-w-7xl mx-auto text-center">
+          <span className="bg-[#FDF2E9] text-[#D97706] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded">
+            Get In Touch
+          </span>
+          
+          <h1 className="font-serif italic text-5xl md:text-6xl lg:text-7xl text-[#0F172A] leading-[1.05] mt-6">
+            Let's start a conversation
+          </h1>
+          
+          <p className="mt-6 text-slate-600 text-lg max-w-xl mx-auto">
+            Have questions about our products or need help building your ideal workspace? 
+            We're here to help.
+          </p>
+        </div>
+      </section>
 
-/* ================= CONTACT PAGE ================= */
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 pb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+          
+          {/* Contact Form */}
+          <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm">
+            <h2 className="font-serif italic text-3xl text-[#0F172A] mb-8">Send us a message</h2>
+            
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Your Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-5 py-3.5 bg-slate-50 border border-transparent rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-200 transition-all"
+                  placeholder="John Doe"
+                />
+              </div>
 
-const Contact = () => {
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Email Address</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-5 py-3.5 bg-slate-50 border border-transparent rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-200 transition-all"
+                  placeholder="you@example.com"
+                />
+              </div>
 
-const [form,setForm]=useState({
-name:"",
-email:"",
-message:""
-});
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Subject</label>
+                <input
+                  type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-5 py-3.5 bg-slate-50 border border-transparent rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-200 transition-all"
+                  placeholder="Product Inquiry"
+                />
+              </div>
 
-const handleChange=(e)=>{
-setForm({...form,[e.target.name]:e.target.value});
-};
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Message</label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={6}
+                  className="w-full px-5 py-4 bg-slate-50 border border-transparent rounded-3xl focus:outline-none focus:ring-2 focus:ring-slate-200 transition-all resize-y"
+                  placeholder="Tell us how we can help you..."
+                />
+              </div>
 
-const handleSubmit=(e)=>{
-e.preventDefault();
-alert("Message sent successfully!");
-setForm({name:"",email:"",message:""});
-};
+              <button
+                type="submit"
+                className="w-full bg-[#0F172A] text-white font-medium py-4 rounded-2xl hover:bg-slate-800 transition-colors text-base mt-4"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
 
-return(
-<div className="bg-white">
+          {/* Contact Info */}
+          <div className="space-y-12">
+            <div>
+              <h3 className="font-serif italic text-2xl text-[#0F172A] mb-6">Get in touch directly</h3>
+              
+              <div className="space-y-8">
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 bg-[#FDF2E9] text-[#D97706] rounded-2xl flex items-center justify-center text-xl">✉️</div>
+                  <div>
+                    <p className="font-medium text-slate-900">Email</p>
+                    <a href="mailto:hello@moderna.com" className="text-slate-600 hover:text-slate-900 transition-colors">hello@moderna.com</a>
+                  </div>
+                </div>
 
-{/* ================= HEADER ================= */}
-<section className="bg-emerald-50/50 py-16 px-8">
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 bg-[#FDF2E9] text-[#D97706] rounded-2xl flex items-center justify-center text-xl">📞</div>
+                  <div>
+                    <p className="font-medium text-slate-900">Phone</p>
+                    <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-slate-900 transition-colors">
+                      +91 98765 43210
+                    </a>
+                  </div>
+                </div>
 
-<div className="max-w-6xl mx-auto text-center">
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 bg-[#FDF2E9] text-[#D97706] rounded-2xl flex items-center justify-center text-xl">📍</div>
+                  <div>
+                    <p className="font-medium text-slate-900">Visit Us</p>
+                    <p className="text-slate-600">
+                      Studio 12, Design District<br />
+                      Mumbai, Maharashtra 400001
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-<h4 className="text-[#2E7D56] font-semibold uppercase text-sm mb-4">
-Contact Us
-</h4>
+            {/* Quick Actions */}
+            <div className="bg-white rounded-3xl p-8">
+              <h4 className="font-medium text-lg mb-5">Quick Links</h4>
+              <div className="space-y-4">
+                <a href="/about" className="block text-slate-700 hover:text-[#0F172A] transition-colors">→ About Us</a>
+                <a href="/collections" className="block text-slate-700 hover:text-[#0F172A] transition-colors">→ Shop Collections</a>
+                <a href="#" className="block text-slate-700 hover:text-[#0F172A] transition-colors">→ Track Your Order</a>
+              </div>
+            </div>
 
-<h2 className="text-5xl font-semibold text-gray-900 mb-6">
-We’re here to help you
-</h2>
-
-<p className="text-gray-600 text-lg max-w-2xl mx-auto">
-Have questions about pharmacy, supplements, fitness or orders?
-Our team is ready to support you.
-</p>
-
-</div>
-
-</section>
-
-{/* ================= CONTACT CARDS ================= */}
-<section className="py-20 px-6">
-
-<div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
-
-{/* PHONE */}
-<div className="bg-white rounded-3xl p-10 shadow-md hover:shadow-xl border text-center">
-<div className="flex justify-center text-[#2E7D56] mb-6">
-<PhoneIcon />
-</div>
-<h3 className="text-2xl font-semibold mb-2">Call Us</h3>
-<p className="text-gray-600">+94 11 234 5678</p>
-</div>
-
-{/* EMAIL */}
-<div className="bg-white rounded-3xl p-10 shadow-md hover:shadow-xl border text-center">
-<div className="flex justify-center text-[#2E7D56] mb-6">
-<MailIcon />
-</div>
-<h3 className="text-2xl font-semibold mb-2">Email</h3>
-<p className="text-gray-600">support@vivara.com</p>
-</div>
-
-{/* LOCATION */}
-<div className="bg-white rounded-3xl p-10 shadow-md hover:shadow-xl border text-center">
-<div className="flex justify-center text-[#2E7D56] mb-6">
-<LocationIcon />
-</div>
-<h3 className="text-2xl font-semibold mb-2">Location</h3>
-<p className="text-gray-600">Colombo, Sri Lanka</p>
-</div>
-
-</div>
-
-</section>
-
-{/* ================= FORM ================= */}
-<section className="bg-[#f7faf8] py-20 px-6">
-
-<div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-
-{/* LEFT TEXT */}
-{/* <div>
-<h2 className="text-4xl font-bold mb-6">
-Send us a message
-</h2>
-
-<p className="text-gray-600 text-lg">
-We usually respond within 24 hours.
-</p>
-</div> */}
-
-{/* FORM */}
-{/* <form
-onSubmit={handleSubmit}
-className="bg-white rounded-3xl shadow-md p-10 space-y-6"
->
-
-<input
-type="text"
-name="name"
-placeholder="Your Name"
-value={form.name}
-onChange={handleChange}
-className="w-full p-4 border rounded-xl focus:outline-none focus:border-[#2E7D56]"
-/>
-
-<input
-type="email"
-name="email"
-placeholder="Your Email"
-value={form.email}
-onChange={handleChange}
-className="w-full p-4 border rounded-xl focus:outline-none focus:border-[#2E7D56]"
-/>
-
-<textarea
-name="message"
-placeholder="Your Message"
-value={form.message}
-onChange={handleChange}
-rows="5"
-className="w-full p-4 border rounded-xl focus:outline-none focus:border-[#2E7D56]"
-/>
-
-<button
-type="submit"
-className="w-full py-4 bg-[#2E7D56] text-white rounded-xl font-semibold hover:bg-[#256a47]"
->
-Send Message
-</button>
-
-</form> */}
-
-</div>
-
-</section>
-
-{/* ================= CTA ================= */}
-<section className="py-24 px-6 bg-white">
-
-<div className="max-w-6xl mx-auto">
-
-<div className="rounded-[32px] bg-[#2E7D56] px-10 md:px-20 py-20 text-center text-white shadow-xl">
-
-<h2 className="text-5xl font-bold">
-Need immediate support?
-</h2>
-
-<p className="mt-6 text-lg text-emerald-100 max-w-2xl mx-auto">
-Our team is available to help you with orders, prescriptions and guidance.
-</p>
-
-<a
-href="https://wa.me/94712345678"   // Change this number to your WhatsApp number
-target="_blank"
-rel="noopener noreferrer"
-className="inline-block mt-10 px-10 py-4 bg-white text-[#2E7D56] rounded-xl font-semibold hover:scale-105 transition"
->
-Contact Support
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-</div>
-);
-};
-
-export default Contact;
+            {/* WhatsApp Floating Style */}
+            <a 
+              href="https://wa.me/919876543210" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 bg-green-600 text-white px-6 py-4 rounded-2xl hover:bg-green-700 transition-colors w-fit"
+            >
+              <span className="text-2xl">💬</span>
+              <div>
+                <p className="font-medium">Chat on WhatsApp</p>
+                <p className="text-sm opacity-90">Instant Support</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
