@@ -1,6 +1,7 @@
 import React from 'react';
 import WorkWave from "../assets/Mains/Work & Weave.jpg";
 
+
 export default function HeroSection() {
   return (
     <section className="w-full min-h-screen bg-[#F9F9FB] flex items-center justify-center px-6 py-12 md:px-16 lg:px-24">

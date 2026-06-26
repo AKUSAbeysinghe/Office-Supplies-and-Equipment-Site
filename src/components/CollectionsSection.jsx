@@ -1,4 +1,6 @@
 import React from 'react';
+import Stationary from "../assets/Mains/Stationary/OfficeStationary.jpg";
+import Solutions from "../assets/Mains/Solutions.jpg";
 
 const collections = [
   {
@@ -18,14 +20,14 @@ const collections = [
   {
     title: "Writing",
     subtitle: "Precision Instruments",
-    image: "https://images.unsplash.com/photo-1513475382585-d6a8c9d4a0e4", // Fixed
+    image: Stationary, 
     link: "/stationary",
     count: "19 products"
   },
   {
     title: "Solutions",
     subtitle: "For Teams & Offices",
-    image: "https://images.unsplash.com/photo-1497366811353-6870744ef2e7", // Fixed
+    image: Solutions,
     link: "/solutions",
     count: "35 products"
   }

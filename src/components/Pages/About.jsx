@@ -1,4 +1,5 @@
 import React from 'react';
+import AboutPic from "../../assets/Mains/Work & Weave.jpg";
 
 export default function AboutPage() {
   return (
@@ -43,7 +44,7 @@ export default function AboutPage() {
           {/* Image */}
           <div className="rounded-3xl overflow-hidden shadow-sm aspect-[4/3] lg:aspect-square bg-gray-200">
             <img 
-              src="https://images.unsplash.com/photo-1497366811353-6870744ef2e7" 
+              src={AboutPic}
               alt="Modern minimalist studio" 
               className="w-full h-full object-cover"
             />

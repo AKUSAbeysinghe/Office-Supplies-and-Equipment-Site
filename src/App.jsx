@@ -9,6 +9,7 @@ import StationeryFeature from "./components/Pages/StationaryFeature.jsx";
 import Solutions from "./components/Pages/Solutions.jsx";
 import About from "./components/Pages/About.jsx";
 import Footer from "./components/Footer";
+import CollectionsSection from "./components/CollectionsSection.jsx";
 
 import PrivacyPolicy from "./components/Pages/Privacy";
 import TermsOfService from "./components/Pages/Terms.jsx";
@@ -183,6 +184,18 @@ function App() {
             </Layout>
           }
         />
+
+        <Route
+          path="/collections"
+          element={
+            <Layout>
+              <CollectionsSection />
+            </Layout>
+          }
+        />
+
+
+
 
         {/* Admin Pages */}
         <Route

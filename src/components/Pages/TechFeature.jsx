@@ -19,7 +19,7 @@ const TechPage = () => {
     setError("");
 
     try {
-      const res = await fetch("http://localhost/home_furniture/api/get_products.php");
+      const res = await fetch("http://localhost/officestuff_db/api/get_products.php");
       const data = await res.json();
 
       if (data.success && Array.isArray(data.data)) {
@@ -53,7 +53,7 @@ const TechPage = () => {
         <img
           src={
             item.image_url
-              ? `http://localhost/home_furniture/${item.image_url}`
+              ? `http://localhost/officestuff_db/${item.image_url}`
               : "https://via.placeholder.com/600x400?text=Tech+Product"
           }
           alt={item.name}
