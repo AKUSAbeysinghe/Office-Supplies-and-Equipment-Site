@@ -2,17 +2,19 @@ import React, { useState, useEffect } from "react";
 import TechBanner from "../../assets/Mains/Tech/TechBanner.jpg";
 
 const SUBCATEGORY_IDS = {
-  COMPUTERS_LAPTOPS: 15,        // Update these IDs based on your database
-  PRINTERS_SCANNERS: 16,
-  COMMUNICATION_DEVICES: 17,
-  NETWORKING_EQUIPMENT: 18,
-  OFFICE_ACCESSORIES: 19,
+  COMPUTERS_LAPTOPS: 6,
+  PRINTERS_SCANNERS: 7,
+  COMMUNICATION_DEVICES: 8,
+  NETWORKING_EQUIPMENT: 9,
+  OFFICE_ACCESSORIES: 10,
 };
 
 const TechPage = () => {
   const [techItems, setTechItems] = useState([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+
+  const whatsappNumber = "94712345678"; // ← CHANGE THIS TO YOUR ACTUAL WHATSAPP NUMBER (without +)
 
   const fetchTechItems = async () => {
     setIsLoading(true);
@@ -23,8 +25,10 @@ const TechPage = () => {
       const data = await res.json();
 
       if (data.success && Array.isArray(data.data)) {
-        const items = data.data.filter(item => item.category_id === 2); // Tech category
-        setTechItems(items);
+        const officeItems = data.data.filter(
+          item => Number(item.category_id) === 2
+        );
+        setTechItems(officeItems);
       } else {
         setError("Could not load tech products");
       }
@@ -47,44 +51,61 @@ const TechPage = () => {
   const networkingEquipment = techItems.filter(item => item.sub_category_id === SUBCATEGORY_IDS.NETWORKING_EQUIPMENT);
   const officeAccessories = techItems.filter(item => item.sub_category_id === SUBCATEGORY_IDS.OFFICE_ACCESSORIES);
 
-  const TechCard = ({ item }) => (
-    <div className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100">
-      <div className="relative">
-        <img
-          src={
-            item.image_url
-              ? `http://localhost/officestuff_db/${item.image_url}`
-              : "https://via.placeholder.com/600x400?text=Tech+Product"
-          }
-          alt={item.name}
-          className="w-full h-72 object-cover"
-          onError={(e) => {
-            e.target.src = "https://via.placeholder.com/600x400?text=No+Image";
-          }}
-        />
-        {item.popular && (
-          <div className="absolute top-3 left-3 bg-[#8bb174] text-white text-xs font-semibold px-3 py-1 rounded-full">
-            Best Seller
+  const TechCard = ({ item }) => {
+    const whatsappMessage = encodeURIComponent(
+      `Hi, I'm interested in "${item.name}" (Rs. ${new Intl.NumberFormat("en-LK").format(item.price)}). Please send me more details.`
+    );
+    const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+
+    return (
+      <div className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100 group">
+        <div className="relative">
+          <img
+            src={
+              item.image_url
+                ? `http://localhost/officestuff_db/${item.image_url}`
+                : "https://via.placeholder.com/600x400?text=Tech+Product"
+            }
+            alt={item.name}
+            className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105"
+            onError={(e) => {
+              e.target.src = "https://via.placeholder.com/600x400?text=No+Image";
+            }}
+          />
+          {item.popular && (
+            <div className="absolute top-3 left-3 bg-[#8bb174] text-white text-xs font-semibold px-3 py-1 rounded-full">
+              Best Seller
+            </div>
+          )}
+          <div className="absolute top-3 right-3 bg-gray-900 bg-opacity-80 text-white text-sm font-bold px-4 py-1.5 rounded-full">
+            Rs. {new Intl.NumberFormat("en-LK").format(item.price)}
           </div>
-        )}
-        <div className="absolute top-3 right-3 bg-gray-900 bg-opacity-80 text-white text-sm font-bold px-4 py-1.5 rounded-full">
-          Rs. {new Intl.NumberFormat("en-LK").format(item.price)}
+        </div>
+
+        <div className="p-6">
+          <h3 className="text-xl font-semibold text-gray-800 mb-2">{item.name}</h3>
+          <p className="mt-2 text-gray-600 text-sm line-clamp-2">
+            {item.description || "Premium technology solution for modern workspaces"}
+          </p>
+
+          <a
+            href={whatsappLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 w-full py-3.5 px-6 
+                       bg-[#0F172A] hover:bg-slate-800 
+                       text-white font-semibold 
+                       rounded-2xl transition-all duration-300 
+                       flex items-center justify-center gap-2
+                       shadow-sm hover:shadow-md active:scale-[0.985]"
+          >
+            View Details on WhatsApp
+            <span className="text-lg transition-transform group-hover:translate-x-1">→</span>
+          </a>
         </div>
       </div>
-      <div className="p-6">
-        <h3 className="text-xl font-semibold text-gray-800">{item.name}</h3>
-        <p className="mt-2 text-gray-600 text-sm line-clamp-2">
-          {item.description || "Premium technology solution for modern workspaces"}
-        </p>
-        <a
-          href={`/product/${item.id}`}
-          className="mt-6 w-full py-3.5 bg-[#0F172A] hover:bg-slate-800 text-white font-semibold rounded-xl transition duration-300 block text-center"
-        >
-          View Details
-        </a>
-      </div>
-    </div>
-  );
+    );
+  };
 
   const Section = ({ title, subtitle, items, bgColor = "bg-[#fdfaf6]", id }) => (
     <div className={`${bgColor} py-16 px-4 sm:px-6 lg:px-8`} id={id}>
@@ -104,6 +125,9 @@ const TechPage = () => {
     </div>
   );
 
+  // WhatsApp link for Book Showroom
+  const bookShowroomWhatsApp = `https://wa.me/${whatsappNumber}?text=Hi,%20I%20would%20like%20to%20book%20a%20showroom%20visit.%20Please%20let%20me%20know%20available%20times.`;
+
   return (
     <div className="bg-[#fdfaf6]">
       {error && (
@@ -116,10 +140,9 @@ const TechPage = () => {
         <div className="text-center py-20 text-gray-600">Loading Tech Collection...</div>
       )}
 
-      {/* === Premium Editorial Hero === */}
+      {/* Premium Editorial Hero */}
       <section className="w-full min-h-[500px] bg-[#F9F9FB] flex items-center justify-center px-6 py-12 md:px-16 lg:px-24">
         <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left Side */}
           <div className="flex flex-col items-start space-y-6 max-w-xl">
             <span className="bg-[#FDF2E9] text-[#D97706] text-[11px] font-bold uppercase tracking-widest px-2.5 py-1 rounded">
               Technology
@@ -142,7 +165,9 @@ const TechPage = () => {
                 Shop Collection
               </a>
               <a
-                href="/book-showroom"
+                href={bookShowroomWhatsApp}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-8 py-4 border border-[#0F172A] text-[#0F172A] font-semibold rounded-full hover:bg-[#0F172A] hover:text-white transition"
               >
                 Book Showroom
@@ -150,7 +175,6 @@ const TechPage = () => {
             </div>
           </div>
 
-          {/* Right Side - Banner */}
           <div className="w-full h-[350px] sm:h-[450px] lg:h-[520px] rounded-3xl overflow-hidden bg-slate-100">
             <img
               src={TechBanner}
@@ -236,7 +260,9 @@ const TechPage = () => {
             
             <div className="pt-3 flex flex-col sm:flex-row gap-4">
               <a 
-                href="/book-showroom"
+                href={bookShowroomWhatsApp}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-[#0F172A] text-white font-semibold text-sm px-8 py-3.5 rounded-full hover:bg-slate-800 transition-colors shadow-sm whitespace-nowrap"
               >
                 Book Showroom Visit
