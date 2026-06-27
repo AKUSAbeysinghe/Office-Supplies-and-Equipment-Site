@@ -28,7 +28,7 @@ const AdminPanel = () => {
 
   const [admin] = useState({
     name: "Admin",
-    email: "admin@pharmacy.lk",
+    email: "admin@officestuff.lk",
     profilePic: "https://i.pravatar.cc/100?img=25",
   });
 
@@ -133,7 +133,7 @@ const AdminPanel = () => {
       const result = await res.json();
 
       if (result.success) {
-        setMessage(isEditing ? "✅ Updated!" : "✅ Product added successfully!");
+        setMessage(isEditing ? "✅ Product Updated!" : "✅ Product Added Successfully!");
         setShowForm(false);
         resetForm();
         fetchProducts();
@@ -194,7 +194,7 @@ const AdminPanel = () => {
       });
       const result = await res.json();
       if (result.success) {
-        setMessage("✅ Deleted!");
+        setMessage("✅ Product Deleted!");
         setProducts(prev => prev.filter(p => p.id !== itemToDelete));
       }
     } catch (err) {
@@ -206,36 +206,48 @@ const AdminPanel = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 font-sans text-gray-800 p-8">
+    <div className="min-h-screen bg-[#fdfaf6] font-sans text-gray-800 p-6 md:p-8">
       {/* Header */}
-      <div className="flex items-center justify-between mb-8 bg-white rounded-xl shadow p-6">
+      <div className="flex items-center justify-between mb-8 bg-white rounded-2xl shadow p-6 border border-gray-100">
         <div className="flex items-center gap-6">
-          <img src={admin.profilePic} alt="admin" className="w-20 h-20 rounded-full border-4 border-emerald-500" />
+          <img 
+            src={admin.profilePic} 
+            alt="admin" 
+            className="w-20 h-20 rounded-full border-4 border-[#8bb174]" 
+          />
           <div>
             <h1 className="text-3xl font-bold text-gray-900">{admin.name}</h1>
             <p className="text-gray-600">{admin.email}</p>
-            <p className="text-emerald-600 font-semibold">Pharmacy Admin Panel</p>
+            <p className="text-[#8bb174] font-semibold">Office Stuff Admin Panel</p>
           </div>
         </div>
       </div>
 
       {/* Messages */}
-      {message && <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-800 rounded-xl">{message}</div>}
-      {error && <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-800 rounded-xl">{error}</div>}
+      {message && (
+        <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-800 rounded-2xl">
+          {message}
+        </div>
+      )}
+      {error && (
+        <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-800 rounded-2xl">
+          {error}
+        </div>
+      )}
 
       <div className="mb-6">
         <button
           onClick={() => { resetForm(); setShowForm(true); }}
-          className="bg-emerald-700 hover:bg-emerald-800 text-white px-8 py-3 rounded-full font-semibold shadow-lg"
+          className="bg-[#0F172A] hover:bg-slate-800 text-white px-8 py-3.5 rounded-2xl font-semibold shadow-md transition-all duration-300 flex items-center gap-2"
         >
           + Add New Product
         </button>
       </div>
 
       {/* Products Table */}
-      <div className="bg-white rounded-2xl shadow overflow-hidden">
-        <div className="p-6 border-b">
-          <h2 className="text-2xl font-bold">All Products</h2>
+      <div className="bg-white rounded-2xl shadow overflow-hidden border border-gray-100">
+        <div className="p-6 border-b bg-[#fdfaf6]">
+          <h2 className="text-2xl font-bold text-gray-800">All Products</h2>
         </div>
 
         <div className="overflow-x-auto">
@@ -254,10 +266,14 @@ const AdminPanel = () => {
             </thead>
             <tbody>
               {products.length === 0 ? (
-                <tr><td colSpan="8" className="p-10 text-center text-gray-500">No products yet</td></tr>
+                <tr>
+                  <td colSpan="8" className="p-12 text-center text-gray-500">
+                    No products yet
+                  </td>
+                </tr>
               ) : (
                 products.map((product) => (
-                  <tr key={product.id} className="border-b hover:bg-gray-50">
+                  <tr key={product.id} className="border-b hover:bg-[#fdfaf6]">
                     <td className="p-4">
                       <img
                         src={
@@ -266,7 +282,7 @@ const AdminPanel = () => {
                             : "https://via.placeholder.com/80x80?text=No+Image"
                         }
                         alt={product.name}
-                        className="w-16 h-16 object-cover rounded-lg"
+                        className="w-16 h-16 object-cover rounded-xl"
                         onError={(e) => {
                           e.target.src = "https://via.placeholder.com/80x80?text=Failed";
                         }}
@@ -280,13 +296,21 @@ const AdminPanel = () => {
                     </td>
                     <td className="p-4">{product.stock}</td>
                     <td className="p-4">
-                      {product.popular ? "Yes" : "No"}
+                      {product.popular ? (
+                        <span className="bg-[#8bb174] text-white text-xs px-3 py-1 rounded-full">Yes</span>
+                      ) : "No"}
                     </td>
                     <td className="p-4 space-x-3">
-                      <button onClick={() => handleEdit(product)} className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm hover:bg-blue-700">
+                      <button 
+                        onClick={() => handleEdit(product)} 
+                        className="bg-[#0F172A] hover:bg-slate-800 text-white px-5 py-2 rounded-2xl text-sm transition"
+                      >
                         Edit
                       </button>
-                      <button onClick={() => confirmDelete(product.id)} className="bg-red-600 text-white px-5 py-2 rounded-full text-sm hover:bg-red-700">
+                      <button 
+                        onClick={() => confirmDelete(product.id)} 
+                        className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-2xl text-sm transition"
+                      >
                         Delete
                       </button>
                     </td>
@@ -301,66 +325,137 @@ const AdminPanel = () => {
       {/* Add/Edit Form Modal */}
       {showForm && (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4">
-          <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-8">
-            <h3 className="text-2xl font-bold mb-6 text-center">
+          <form onSubmit={handleSubmit} className="bg-white rounded-3xl shadow-2xl w-full max-w-lg p-8">
+            <h3 className="text-2xl font-bold mb-6 text-center text-gray-800">
               {isEditing ? "Edit Product" : "Add New Product"}
             </h3>
 
-            {/* Category & Subcategory selects */}
-            <select name="category_id" value={formData.category_id} onChange={handleChange} className="w-full p-3 mb-4 border rounded-xl" required>
+            <select 
+              name="category_id" 
+              value={formData.category_id} 
+              onChange={handleChange} 
+              className="w-full p-3 mb-4 border border-gray-200 rounded-2xl focus:outline-none focus:border-[#8bb174]" 
+              required
+            >
               <option value="">Select Category</option>
               {categories.map(cat => <option key={cat.id} value={cat.id}>{cat.name}</option>)}
             </select>
 
-            <select name="sub_category_id" value={formData.sub_category_id} onChange={handleChange} className="w-full p-3 mb-4 border rounded-xl" required>
+            <select 
+              name="sub_category_id" 
+              value={formData.sub_category_id} 
+              onChange={handleChange} 
+              className="w-full p-3 mb-4 border border-gray-200 rounded-2xl focus:outline-none focus:border-[#8bb174]" 
+              required
+            >
               <option value="">Select Subcategory</option>
               {subCategories.map(sub => <option key={sub.id} value={sub.id}>{sub.name}</option>)}
             </select>
 
-            <input type="text" name="name" placeholder="Product Name" value={formData.name} onChange={handleChange} className="w-full p-3 mb-4 border rounded-xl" required />
+            <input 
+              type="text" 
+              name="name" 
+              placeholder="Product Name" 
+              value={formData.name} 
+              onChange={handleChange} 
+              className="w-full p-3 mb-4 border border-gray-200 rounded-2xl focus:outline-none focus:border-[#8bb174]" 
+              required 
+            />
 
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div>
-                <label>Price (Rs.)</label>
-                <input type="number" name="price" step="0.01" value={formData.price} onChange={handleChange} className="w-full p-3 border rounded-xl" required />
+                <label className="text-sm text-gray-600">Price (Rs.)</label>
+                <input 
+                  type="number" 
+                  name="price" 
+                  step="0.01" 
+                  value={formData.price} 
+                  onChange={handleChange} 
+                  className="w-full p-3 border border-gray-200 rounded-2xl focus:outline-none focus:border-[#8bb174]" 
+                  required 
+                />
               </div>
               <div>
-                <label>Stock</label>
-                <input type="number" name="stock" value={formData.stock} onChange={handleChange} className="w-full p-3 border rounded-xl" />
+                <label className="text-sm text-gray-600">Stock</label>
+                <input 
+                  type="number" 
+                  name="stock" 
+                  value={formData.stock} 
+                  onChange={handleChange} 
+                  className="w-full p-3 border border-gray-200 rounded-2xl focus:outline-none focus:border-[#8bb174]" 
+                />
               </div>
             </div>
 
-            <textarea name="description" placeholder="Description" value={formData.description} onChange={handleChange} className="w-full p-3 mb-4 border rounded-xl h-24" />
+            <textarea 
+              name="description" 
+              placeholder="Description" 
+              value={formData.description} 
+              onChange={handleChange} 
+              className="w-full p-3 mb-4 border border-gray-200 rounded-2xl h-24 focus:outline-none focus:border-[#8bb174]" 
+            />
 
-            <div className="flex items-center gap-2 mb-4">
-              <input type="checkbox" name="popular" checked={formData.popular} onChange={handleChange} />
-              <label>Mark as Popular</label>
+            <div className="flex items-center gap-2 mb-6">
+              <input 
+                type="checkbox" 
+                name="popular" 
+                checked={formData.popular} 
+                onChange={handleChange} 
+                className="w-5 h-5 accent-[#8bb174]" 
+              />
+              <label className="font-medium">Mark as Popular / Best Seller</label>
             </div>
 
-            <div className="mb-6">
-              <label className="block mb-2">Product Image</label>
-              <input type="file" name="image" accept="image/*" onChange={handleChange} className="w-full" />
+            <div className="mb-8">
+              <label className="block mb-2 text-sm text-gray-600">Product Image</label>
+              <input 
+                type="file" 
+                name="image" 
+                accept="image/*" 
+                onChange={handleChange} 
+                className="w-full" 
+              />
             </div>
 
             <div className="flex justify-end gap-4">
-              <button type="button" onClick={() => setShowForm(false)} className="px-6 py-3 bg-gray-200 rounded-xl">Cancel</button>
-              <button type="submit" disabled={isSubmitting} className="px-8 py-3 bg-emerald-700 text-white rounded-xl">
-                {isSubmitting ? "Saving..." : isEditing ? "Update" : "Add Product"}
+              <button 
+                type="button" 
+                onClick={() => setShowForm(false)} 
+                className="px-6 py-3 bg-gray-200 hover:bg-gray-300 rounded-2xl transition"
+              >
+                Cancel
+              </button>
+              <button 
+                type="submit" 
+                disabled={isSubmitting} 
+                className="px-8 py-3 bg-[#0F172A] hover:bg-slate-800 text-white rounded-2xl transition"
+              >
+                {isSubmitting ? "Saving..." : isEditing ? "Update Product" : "Add Product"}
               </button>
             </div>
           </form>
         </div>
       )}
 
-      {/* Delete Modal */}
+      {/* Delete Confirmation Modal */}
       {showConfirmModal && (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl p-8 max-w-sm w-full text-center">
+          <div className="bg-white rounded-3xl p-8 max-w-sm w-full text-center">
             <h3 className="text-xl font-bold mb-4">Confirm Delete</h3>
-            <p className="mb-6">Are you sure?</p>
+            <p className="mb-6 text-gray-600">Are you sure you want to delete this product?</p>
             <div className="flex justify-center gap-4">
-              <button onClick={() => setShowConfirmModal(false)} className="px-6 py-3 bg-gray-200 rounded-xl">Cancel</button>
-              <button onClick={handleDelete} className="px-6 py-3 bg-red-600 text-white rounded-xl">Delete</button>
+              <button 
+                onClick={() => setShowConfirmModal(false)} 
+                className="px-6 py-3 bg-gray-200 hover:bg-gray-300 rounded-2xl transition"
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={handleDelete} 
+                className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-2xl transition"
+              >
+                Yes, Delete
+              </button>
             </div>
           </div>
         </div>
