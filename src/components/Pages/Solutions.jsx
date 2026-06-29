@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Receipt, Truck, Users, Leaf } from 'lucide-react';
+import React from 'react';
+import { Receipt, Truck, Users, Leaf, Mail, Phone, MessageCircle } from 'lucide-react';
 import SolutionImage from "../../assets/Mains/basement office.jpg";
 
 // ====================== HERO SECTION ======================
@@ -79,23 +79,17 @@ const ProcurementFeatures = () => {
 
   return (
     <section className="w-full bg-white py-16 px-6 md:px-12 lg:px-20 max-w-7xl mx-auto">
-      {/* Section Heading */}
       <h2 className="text-3xl md:text-4xl lg:text-[42px] font-serif font-normal text-[#0d1527] mb-12 tracking-tight">
         A procurement partner, not a checkout page.
       </h2>
 
-      {/* Responsive Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {features.map((feature, index) => (
           <div
             key={index}
             className="border border-slate-100 bg-white rounded-2xl p-8 flex flex-col items-start justify-between min-h-[220px] transition-shadow duration-200 hover:shadow-sm"
           >
-            {/* Icon Container */}
-            <div className="mb-6">
-              {feature.icon}
-            </div>
-            {/* Text Content */}
+            <div className="mb-6">{feature.icon}</div>
             <div className="flex-1 flex flex-col justify-end">
               <h3 className="text-lg font-semibold text-[#0d1527] mb-2 tracking-tight">
                 {feature.title}
@@ -134,24 +128,19 @@ const FrequentlyAskedQuestions = () => {
 
   return (
     <section className="w-full bg-white py-20 px-6 md:px-12 lg:px-20 max-w-5xl mx-auto">
-      {/* Section Title */}
       <h2 className="text-4xl md:text-[42px] font-serif font-normal text-[#0d1527] mb-16 tracking-tight">
         Frequently asked
       </h2>
 
-      {/* FAQ List Container */}
       <div className="flex flex-col">
         {faqs.map((faq, index) => (
           <div
             key={index}
             className="py-8 first:pt-0 border-b border-slate-200 last:border-b-0"
           >
-            {/* Question */}
             <h3 className="text-lg font-bold text-[#0d1527] mb-3 tracking-tight">
               {faq.question}
             </h3>
-
-            {/* Answer */}
             <p className="text-slate-500 text-base font-normal leading-relaxed max-w-4xl">
               {faq.answer}
             </p>
@@ -162,44 +151,29 @@ const FrequentlyAskedQuestions = () => {
   );
 };
 
-// ====================== CONTACT FORM SECTION ======================
-const ProcurementContactForm = () => {
-  const [formData, setFormData] = useState({
-    companyName: '',
-    workEmail: '',
-    teamSize: '',
-  });
+// ====================== CONTACT SECTION ======================
+const ProcurementContact = () => {
+  const whatsappNumber = "1234567890"; // ← CHANGE THIS to your actual WhatsApp number (only digits)
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form Submitted:', formData);
-    // Add your actual submission logic here (API call, etc.)
-    alert('Thank you! A specialist will reach out soon.');
+  const openWhatsApp = () => {
+    window.open(`https://wa.me/${whatsappNumber}`, '_blank');
   };
 
   return (
     <section className="w-full bg-white py-12 px-4 md:px-12 lg:px-20 max-w-7xl mx-auto">
-      {/* Dark Main Container */}
       <div className="w-full bg-[#0d1527] rounded-[32px] p-8 md:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        {/* Left Column: Typography & Links */}
+        
+        {/* Left Column */}
         <div className="lg:col-span-6 flex flex-col justify-between h-full space-y-12 lg:space-y-24">
           <div className="space-y-4">
-            {/* Title */}
             <h2 className="text-4xl md:text-5xl font-serif font-normal text-white tracking-tight">
               Let's talk procurement.
             </h2>
-            {/* Subtitle */}
             <p className="text-slate-400 text-base md:text-lg font-normal leading-relaxed max-w-md">
               Share a few details about your team and a specialist will reach out within one business day.
             </p>
           </div>
 
-          {/* Footer Navigation Links */}
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm md:text-base">
             <span className="text-slate-500 font-normal">Prefer to browse?</span>
             <a href="#furniture" className="text-slate-400 hover:text-white transition-colors duration-200 flex items-center gap-1 font-normal">
@@ -214,51 +188,47 @@ const ProcurementContactForm = () => {
           </div>
         </div>
 
-        {/* Right Column: Form Inputs */}
-        <div className="lg:col-span-6 w-full max-w-lg lg:ml-auto">
-          <form onSubmit={handleSubmit} className="space-y-4 flex flex-col items-start">
-            {/* Company Name Input */}
-            <input
-              type="text"
-              name="companyName"
-              placeholder="Company name"
-              value={formData.companyName}
-              onChange={handleChange}
-              className="w-full bg-[#1b253b] text-white placeholder-slate-500 rounded-full px-6 py-4 outline-none border border-transparent focus:border-slate-700 transition-colors duration-200 text-base font-normal"
-              required
-            />
+        {/* Right Column - Themed Icons + WhatsApp Button */}
+        <div className="lg:col-span-6 w-full max-w-lg lg:ml-auto flex flex-col items-start space-y-8">
+          <div className="space-y-6 w-full">
+            <p className="text-slate-300 text-lg leading-relaxed">
+              Our business team is ready to help you find the right solutions for your workspace.
+            </p>
 
-            {/* Work Email Input */}
-            <input
-              type="email"
-              name="workEmail"
-              placeholder="Work email"
-              value={formData.workEmail}
-              onChange={handleChange}
-              className="w-full bg-[#1b253b] text-white placeholder-slate-500 rounded-full px-6 py-4 outline-none border border-transparent focus:border-slate-700 transition-colors duration-200 text-base font-normal"
-              required
-            />
+            {/* Contact Options with Lucide Icons */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <a
+                href="mailto:business@moderna.com"
+                className="group bg-[#1b253b] hover:bg-[#24314f] border border-slate-700 hover:border-[#ff7315] transition-all duration-200 rounded-2xl p-6 flex flex-col items-start"
+              >
+                <Mail className="w-8 h-8 text-[#ff7315] mb-4" />
+                <div className="font-medium text-white group-hover:text-[#ff7315] transition-colors">
+                  Email our team
+                </div>
+                <div className="text-slate-400 text-sm mt-1">business@moderna.com</div>
+              </a>
 
-            {/* Team Size Input */}
-            <input
-              type="text"
-              name="teamSize"
-              placeholder="Team size"
-              value={formData.teamSize}
-              onChange={handleChange}
-              className="w-full bg-[#1b253b] text-white placeholder-slate-500 rounded-full px-6 py-4 outline-none border border-transparent focus:border-slate-700 transition-colors duration-200 text-base font-normal"
-              required
-            />
+              <a
+                href="tel:+18005551234"
+                className="group bg-[#1b253b] hover:bg-[#24314f] border border-slate-700 hover:border-[#ff7315] transition-all duration-200 rounded-2xl p-6 flex flex-col items-start"
+              >
+                <Phone className="w-8 h-8 text-[#ff7315] mb-4" />
+                <div className="font-medium text-white group-hover:text-[#ff7315] transition-colors">
+                  Call us directly
+                </div>
+                <div className="text-slate-400 text-sm mt-1">+1 (800) 555-1234</div>
+              </a>
+            </div>
 
-            {/* Submit Button */}
+            {/* WhatsApp Button - Now using theme orange */}
             <button
-              type="submit"
-              className="mt-2 bg-[#ff7315] hover:bg-[#e0620f] text-white font-medium px-8 py-4 rounded-full flex items-center justify-center gap-2 transition-colors duration-200 shadow-md whitespace-nowrap"
+              onClick={openWhatsApp}
+              className="w-full bg-[#ff7315] hover:bg-[#e0620f] text-white font-medium px-8 py-4 rounded-full flex items-center justify-center gap-3 transition-colors duration-200 shadow-md text-lg"
             >
-              Request access
-              <span className="text-sm font-bold">→</span>
+              <MessageCircle className="w-6 h-6" />
+              Start conversation on WhatsApp
             </button>
-          </form>
+          </div>
         </div>
       </div>
     </section>
@@ -272,7 +242,7 @@ const ModernaBusinessPage = () => {
       <ModernaBusinessHero />
       <ProcurementFeatures />
       <FrequentlyAskedQuestions />
-      <ProcurementContactForm />
+      <ProcurementContact />
     </div>
   );
 };
