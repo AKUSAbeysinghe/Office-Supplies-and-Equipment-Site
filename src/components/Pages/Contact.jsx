@@ -1,24 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add your form submission logic here (API call, emailjs, etc.)
-    alert("Thank you! We'll get back to you soon.");
-    setFormData({ name: '', email: '', subject: '', message: '' });
-  };
-
   return (
     <div className="bg-[#F9F9FB] min-h-screen">
       {/* Hero Header */}
@@ -40,132 +22,94 @@ export default function ContactPage() {
       </section>
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 pb-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+        <div className="max-w-2xl mx-auto">
           
-          {/* Contact Form */}
-          <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm">
-            <h2 className="font-serif italic text-3xl text-[#0F172A] mb-8">Send us a message</h2>
+          {/* Contact Info */}
+          <div className="bg-white rounded-3xl p-10 md:p-16 shadow-sm">
+            <h2 className="font-serif italic text-4xl text-[#0F172A] mb-10 text-center">
+              Get in touch directly
+            </h2>
             
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Your Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-5 py-3.5 bg-slate-50 border border-transparent rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-200 transition-all"
-                  placeholder="John Doe"
-                />
+            <div className="space-y-10">
+              {/* Email */}
+              <div className="flex gap-6">
+                <div className="w-14 h-14 bg-[#FDF2E9] text-[#0F172A] rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2.01 2.01 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2" />
+                  </svg>
+                </div>
+                <div className="pt-1">
+                  <p className="font-medium text-slate-900 text-lg">Email</p>
+                  <a href="mailto:hello@moderna.com" className="text-slate-600 hover:text-[#0F172A] transition-colors text-[17px]">
+                    hello@moderna.com
+                  </a>
+                </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Email Address</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-5 py-3.5 bg-slate-50 border border-transparent rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-200 transition-all"
-                  placeholder="you@example.com"
-                />
+              {/* Phone */}
+              <div className="flex gap-6">
+                <div className="w-14 h-14 bg-[#FDF2E9] text-[#0F172A] rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2 2 2 0 01-2-2 2 2 0 01-2-2 2 2 0 012-2 2 2 0 01-2-2 2 2 0 012-2z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 4.01V8" />
+                  </svg>
+                </div>
+                <div className="pt-1">
+                  <p className="font-medium text-slate-900 text-lg">Phone</p>
+                  <a 
+                    href="https://wa.me/919876543210" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="text-slate-600 hover:text-[#0F172A] transition-colors text-[17px]"
+                  >
+                    +91 98765 43210
+                  </a>
+                </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Subject</label>
-                <input
-                  type="text"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-5 py-3.5 bg-slate-50 border border-transparent rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-200 transition-all"
-                  placeholder="Product Inquiry"
-                />
+              {/* Visit Us */}
+              <div className="flex gap-6">
+                <div className="w-14 h-14 bg-[#FDF2E9] text-[#0F172A] rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314-11.314z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <div className="pt-1">
+                  <p className="font-medium text-slate-900 text-lg">Visit Our Studio</p>
+                  <p className="text-slate-600 text-[17px]">
+                    Studio 12, Design District<br />
+                    Mumbai, Maharashtra 400001
+                  </p>
+                </div>
               </div>
-
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Message</label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={6}
-                  className="w-full px-5 py-4 bg-slate-50 border border-transparent rounded-3xl focus:outline-none focus:ring-2 focus:ring-slate-200 transition-all resize-y"
-                  placeholder="Tell us how we can help you..."
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-[#0F172A] text-white font-medium py-4 rounded-2xl hover:bg-slate-800 transition-colors text-base mt-4"
-              >
-                Send Message
-              </button>
-            </form>
+            </div>
           </div>
 
-          {/* Contact Info */}
-          <div className="space-y-12">
-            <div>
-              <h3 className="font-serif italic text-2xl text-[#0F172A] mb-6">Get in touch directly</h3>
-              
-              <div className="space-y-8">
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 bg-[#FDF2E9] text-[#D97706] rounded-2xl flex items-center justify-center text-xl">✉️</div>
-                  <div>
-                    <p className="font-medium text-slate-900">Email</p>
-                    <a href="mailto:hello@moderna.com" className="text-slate-600 hover:text-slate-900 transition-colors">hello@moderna.com</a>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 bg-[#FDF2E9] text-[#D97706] rounded-2xl flex items-center justify-center text-xl">📞</div>
-                  <div>
-                    <p className="font-medium text-slate-900">Phone</p>
-                    <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-slate-900 transition-colors">
-                      +91 98765 43210
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 bg-[#FDF2E9] text-[#D97706] rounded-2xl flex items-center justify-center text-xl">📍</div>
-                  <div>
-                    <p className="font-medium text-slate-900">Visit Us</p>
-                    <p className="text-slate-600">
-                      Studio 12, Design District<br />
-                      Mumbai, Maharashtra 400001
-                    </p>
-                  </div>
-                </div>
-              </div>
+          {/* Quick Links */}
+          <div className="mt-12 bg-white rounded-3xl p-10 shadow-sm">
+            <h4 className="font-medium text-xl mb-6 text-center">Quick Links</h4>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+              <a href="/about" className="py-4 text-slate-700 hover:text-[#0F172A] transition-colors font-medium">About Us</a>
+              <a href="/collections" className="py-4 text-slate-700 hover:text-[#0F172A] transition-colors font-medium">Shop Collections</a>
+              <a href="#" className="py-4 text-slate-700 hover:text-[#0F172A] transition-colors font-medium">Track Order</a>
             </div>
+          </div>
 
-            {/* Quick Actions */}
-            <div className="bg-white rounded-3xl p-8">
-              <h4 className="font-medium text-lg mb-5">Quick Links</h4>
-              <div className="space-y-4">
-                <a href="/about" className="block text-slate-700 hover:text-[#0F172A] transition-colors">→ About Us</a>
-                <a href="/collections" className="block text-slate-700 hover:text-[#0F172A] transition-colors">→ Shop Collections</a>
-                <a href="#" className="block text-slate-700 hover:text-[#0F172A] transition-colors">→ Track Your Order</a>
-              </div>
-            </div>
-
-            {/* WhatsApp Floating Style */}
+          {/* WhatsApp Button */}
+          <div className="mt-12 flex justify-center">
             <a 
               href="https://wa.me/919876543210" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center gap-3 bg-green-600 text-white px-6 py-4 rounded-2xl hover:bg-green-700 transition-colors w-fit"
+              className="flex items-center gap-4 bg-[#0F172A] text-white px-8 py-5 rounded-3xl hover:bg-slate-800 transition-all duration-300 shadow-sm"
             >
-              <span className="text-2xl">💬</span>
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 8a2 2 0 01-2 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V10a2 2 0 012-2" />
+              </svg>
               <div>
-                <p className="font-medium">Chat on WhatsApp</p>
-                <p className="text-sm opacity-90">Instant Support</p>
+                <p className="font-semibold">Chat with us on WhatsApp</p>
+                <p className="text-sm opacity-75">Instant responses • Mon–Sat</p>
               </div>
             </a>
           </div>

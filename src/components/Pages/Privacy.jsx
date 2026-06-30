@@ -3,175 +3,145 @@ import { Link } from 'react-router-dom';
 
 const PrivacyPolicy = () => {
   return (
-    <div className="bg-gray-100 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-      <br></br>
-      <br></br>
-      <br></br>
-      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-800 font-josefin tracking-wide text-center mb-8">
-          Privacy Policy
-        </h1>
-        <p className="text-lg text-gray-600 font-lora leading-relaxed text-center mb-10">
-          Your privacy is important to us. This Privacy Policy explains how FoodHub collects, uses, and protects your information.
-        </p>
-
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 font-josefin tracking-wide mb-4">
-            1. Information We Collect
-          </h2>
-          <p className="text-gray-600 font-lora leading-relaxed">
-            We collect information to provide and improve our services. The types of information we may collect include:
+    <div className="bg-[#F9F9FB] min-h-screen py-20 px-6 md:px-12 lg:px-24">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <span className="bg-[#FDF2E9] text-[#D97706] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded">
+            Legal
+          </span>
+          <h1 className="font-serif italic text-5xl md:text-6xl text-[#0F172A] leading-tight mt-6">
+            Privacy Policy
+          </h1>
+          <p className="mt-6 text-slate-600 text-lg max-w-2xl mx-auto">
+            Your trust matters to us. We are committed to protecting your privacy while delivering exceptional service.
           </p>
-          <ul className="list-disc list-inside mt-4 text-gray-600 font-lora leading-relaxed">
-            <li>
-              <strong>Personal Information:</strong> Name, email address, phone number, or other details you provide when contacting us, placing orders (e.g., via WhatsApp), or filling out forms on our site.
-            </li>
-            <li>
-              <strong>Usage Data:</strong> Information about how you interact with our website, such as pages visited, time spent, and IP address.
-            </li>
-            <li>
-              <strong>Cookies and Tracking Technologies:</strong> We use cookies to enhance your experience, analyze site usage, and personalize content. You can manage cookie preferences through your browser settings.
-            </li>
-          </ul>
-        </section>
+        </div>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 font-josefin tracking-wide mb-4">
-            2. How We Use Your Information
-          </h2>
-          <p className="text-gray-600 font-lora leading-relaxed">
-            We use the collected information for the following purposes:
-          </p>
-          <ul className="list-disc list-inside mt-4 text-gray-600 font-lora leading-relaxed">
-            <li>To process and fulfill your orders, including communicating via third-party platforms like WhatsApp.</li>
-            <li>To respond to inquiries submitted through our contact form or other channels.</li>
-            <li>To improve our website, services, and user experience.</li>
-            <li>To send promotional offers or updates (with your consent, where required).</li>
-            <li>To comply with legal obligations and protect our rights.</li>
-          </ul>
-        </section>
+        <div className="bg-white rounded-3xl shadow-sm p-10 md:p-16 space-y-12">
+          
+          <section>
+            <h2 className="font-serif italic text-3xl text-[#0F172A] mb-6">
+              1. Information We Collect
+            </h2>
+            <p className="text-slate-600 leading-relaxed text-[17px]">
+              We collect information to provide, improve, and personalize our services. This includes:
+            </p>
+            <ul className="list-disc list-inside mt-6 space-y-4 text-slate-600 text-[17px]">
+              <li><strong>Personal Information:</strong> Name, email address, phone number, and other details you provide when contacting us or placing an order.</li>
+              <li><strong>Usage Data:</strong> Information about how you interact with our website, such as pages visited and time spent.</li>
+              <li><strong>Cookies and Tracking:</strong> We use cookies to enhance your browsing experience and analyze site performance.</li>
+            </ul>
+          </section>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 font-josefin tracking-wide mb-4">
-            3. Sharing Your Information
-          </h2>
-          <p className="text-gray-600 font-lora leading-relaxed">
-            We do not sell your personal information. We may share your information with:
-          </p>
-          <ul className="list-disc list-inside mt-4 text-gray-600 font-lora leading-relaxed">
-            <li>
-              <strong>Service Providers:</strong> Third-party services (e.g., WhatsApp for order communication, analytics providers) that help us operate our website and fulfill orders.
-            </li>
-            <li>
-              <strong>Legal Authorities:</strong> When required by law or to protect our rights, safety, or property.
-            </li>
-          </ul>
-        </section>
+          <section>
+            <h2 className="font-serif italic text-3xl text-[#0F172A] mb-6">
+              2. How We Use Your Information
+            </h2>
+            <p className="text-slate-600 leading-relaxed text-[17px]">
+              We use your information for the following purposes:
+            </p>
+            <ul className="list-disc list-inside mt-6 space-y-4 text-slate-600 text-[17px]">
+              <li>To process and fulfill your orders.</li>
+              <li>To respond to your inquiries and provide customer support.</li>
+              <li>To improve our website, products, and overall experience.</li>
+              <li>To communicate important updates and offers (with your consent).</li>
+              <li>To comply with legal obligations.</li>
+            </ul>
+          </section>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 font-josefin tracking-wide mb-4">
-            4. Your Rights
-          </h2>
-          <p className="text-gray-600 font-lora leading-relaxed">
-            Depending on your location, you may have the following rights regarding your personal information:
-          </p>
-          <ul className="list-disc list-inside mt-4 text-gray-600 font-lora leading-relaxed">
-            <li>
-              <strong>Access:</strong> Request a copy of the personal information we hold about you.
-            </li>
-            <li>
-              <strong>Correction:</strong> Request correction of inaccurate or incomplete information.
-            </li>
-            <li>
-              <strong>Deletion:</strong> Request deletion of your personal information, subject to legal obligations.
-            </li>
-            <li>
-              <strong>Opt-Out:</strong> Opt out of promotional communications or certain data processing activities.
-            </li>
-          </ul>
-          <p className="text-gray-600 font-lora leading-relaxed mt-4">
-            To exercise these rights, please contact us at{' '}
-            <a
-              href="mailto:privacy@foodhub.com"
-              className="text-orange-500 hover:text-orange-600 font-lora transition duration-300"
-            >
-              privacy@foodhub.com
-            </a>.
-          </p>
-        </section>
+          <section>
+            <h2 className="font-serif italic text-3xl text-[#0F172A] mb-6">
+              3. Sharing Your Information
+            </h2>
+            <p className="text-slate-600 leading-relaxed text-[17px]">
+              We do not sell your personal information. We may share it only with:
+            </p>
+            <ul className="list-disc list-inside mt-6 space-y-4 text-slate-600 text-[17px]">
+              <li><strong>Trusted Service Providers:</strong> Partners who assist with order fulfillment, shipping, and website analytics.</li>
+              <li><strong>Legal Authorities:</strong> When required by law or to protect our rights and safety.</li>
+            </ul>
+          </section>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 font-josefin tracking-wide mb-4">
-            5. Data Security
-          </h2>
-          <p className="text-gray-600 font-lora leading-relaxed">
-            We implement reasonable security measures to protect your information from unauthorized access, use, or disclosure. However, no method of transmission over the internet is 100% secure.
-          </p>
-        </section>
+          <section>
+            <h2 className="font-serif italic text-3xl text-[#0F172A] mb-6">
+              4. Your Rights
+            </h2>
+            <p className="text-slate-600 leading-relaxed text-[17px]">
+              You have the right to:
+            </p>
+            <ul className="list-disc list-inside mt-6 space-y-4 text-slate-600 text-[17px]">
+              <li>Access the personal information we hold about you.</li>
+              <li>Request correction of inaccurate data.</li>
+              <li>Request deletion of your data (subject to legal requirements).</li>
+              <li>Opt out of marketing communications.</li>
+            </ul>
+            <p className="mt-6 text-slate-600 text-[17px]">
+              To exercise these rights, please contact us at{' '}
+              <a href="mailto:privacy@moderna.com" className="text-[#D97706] hover:underline">
+                privacy@moderna.com
+              </a>
+            </p>
+          </section>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 font-josefin tracking-wide mb-4">
-            6. Cookies and Tracking
-          </h2>
-          <p className="text-gray-600 font-lora leading-relaxed">
-            We use cookies to enhance your browsing experience. You can disable cookies through your browser settings, but this may affect site functionality. For more details, please review our{' '}
-            <Link
-              to="/cookie-policy"
-              className="text-orange-500 hover:text-orange-600 font-lora transition duration-300"
-            >
-              Cookie Policy
-            </Link>.
-          </p>
-        </section>
+          <section>
+            <h2 className="font-serif italic text-3xl text-[#0F172A] mb-6">
+              5. Data Security
+            </h2>
+            <p className="text-slate-600 leading-relaxed text-[17px]">
+              We implement appropriate technical and organizational measures to protect your personal information. However, no method of transmission over the internet is completely secure.
+            </p>
+          </section>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 font-josefin tracking-wide mb-4">
-            7. Third-Party Links
-          </h2>
-          <p className="text-gray-600 font-lora leading-relaxed">
-            Our website may contain links to third-party sites (e.g., WhatsApp for order placement). We are not responsible for the privacy practices of these sites. Please review their privacy policies.
-          </p>
-        </section>
+          <section>
+            <h2 className="font-serif italic text-3xl text-[#0F172A] mb-6">
+              6. Cookies
+            </h2>
+            <p className="text-slate-600 leading-relaxed text-[17px]">
+              Our website uses cookies to improve your experience. You can manage your cookie preferences through your browser settings. For more details, please see our{' '}
+              <Link to="/cookie-policy" className="text-[#D97706] hover:underline">
+                Cookie Policy
+              </Link>.
+            </p>
+          </section>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 font-josefin tracking-wide mb-4">
-            8. Changes to This Policy
-          </h2>
-          <p className="text-gray-600 font-lora leading-relaxed">
-            We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date. Please check back periodically.
-          </p>
-        </section>
+          <section>
+            <h2 className="font-serif italic text-3xl text-[#0F172A] mb-6">
+              7. Changes to This Policy
+            </h2>
+            <p className="text-slate-600 leading-relaxed text-[17px]">
+              We may update this Privacy Policy occasionally. Any changes will be posted here with an updated effective date.
+            </p>
+          </section>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 font-josefin tracking-wide mb-4">
-            9. Contact Us
-          </h2>
-          <p className="text-gray-600 font-lora leading-relaxed">
-            If you have questions about this Privacy Policy, please contact us at:
-          </p>
-          <p className="text-gray-600 font-lora leading-relaxed mt-4">
-            FoodHub<br />
-            [Your Company Address]<br />
-            Email:{' '}
-            <a
-              href="mailto:privacy@foodhub.com"
-              className="text-orange-500 hover:text-orange-600 font-lora transition duration-300"
-            >
-              privacy@foodhub.com
-            </a>
-          </p>
-        </section>
+          <section>
+            <h2 className="font-serif italic text-3xl text-[#0F172A] mb-6">
+              8. Contact Us
+            </h2>
+            <p className="text-slate-600 leading-relaxed text-[17px]">
+              If you have any questions about this Privacy Policy, please reach out to us:
+            </p>
+            <p className="mt-6 text-slate-600 text-[17px]">
+              Moderna.<br />
+              [Your Company Address]<br />
+              Email: <a href="mailto:privacy@moderna.com" className="text-[#D97706] hover:underline">privacy@moderna.com</a>
+            </p>
+          </section>
 
-        <p className="text-gray-600 font-lora leading-relaxed text-center">
-          <strong>Effective Date:</strong> September 23, 2025
-        </p>
+          <div className="pt-8 border-t border-gray-200 text-center">
+            <p className="text-slate-500 text-sm">
+              <strong>Effective Date:</strong> July 01, 2026
+            </p>
+          </div>
+        </div>
 
-        <div className="mt-10 text-center">
+        {/* Back Button */}
+        <div className="mt-12 text-center">
           <Link
             to="/"
-            className="inline-flex items-center px-6 py-3 bg-orange-500 text-white font-lora font-semibold rounded-full hover:bg-orange-600 transition duration-300"
+            className="inline-flex items-center px-10 py-4 bg-[#0F172A] text-white font-medium rounded-full hover:bg-slate-800 transition-colors"
           >
-            Back to Home
+            ← Back to Home
           </Link>
         </div>
       </div>
