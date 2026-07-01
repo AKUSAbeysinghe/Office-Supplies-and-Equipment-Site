@@ -1,35 +1,3 @@
-# Home Furniture Green Theme 🏡
+**Office Stuff** is a modern e-commerce platform offering a wide range of office supplies, stationery, furniture, and workplace essentials with a seamless online shopping experience.
 
-A modern furniture website built using **React + Vite + Tailwind CSS**.
-
----
-
-## 🌿 Features
-
-- Modern responsive UI
-- Furniture collections showcase
-- Smooth navigation
-- Clean green aesthetic theme
-- Built with React components
-
----
-
-## ⚡ Tech Stack
-
-- React JS
-- Vite
-- Tailwind CSS
-
----
-
-## 🚀 About
-
-This project is a furniture e-commerce UI template designed for modern home interior brands. It focuses on elegant design, smooth user experience, and responsive layout.
-
----
-
-## 📦 Setup
-
-```bash
-npm install
-npm run dev
+🔗 Live Demo: https://office-stuff-site.netlify.app/
