@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 import AboutPic from "../../assets/Mains/Work & Weave.jpg";
 
 export default function AboutPage() {
@@ -94,9 +95,11 @@ export default function AboutPage() {
             We help you build a better way of working.
           </h2>
           
-          <button className="mt-12 bg-white text-[#0F172A] font-medium px-10 py-4 rounded-full hover:bg-slate-100 transition-colors">
-            Explore Our Collection
-          </button>
+          <Link to="/collections">
+            <button className="mt-12 bg-white text-[#0F172A] font-medium px-10 py-4 rounded-full hover:bg-slate-100 transition-colors">
+              Explore Our Collection
+            </button>
+          </Link>
         </div>
       </section>
     </div>
